@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage';
 import StudentDashboard from './components/student/StudentDashboard';
 import TutorDashboard from './components/tutor/TutorDashboard';
 import PrincipalDashboard from './components/principal/PrincipalDashboard';
+import LeaveDetailsModal from './components/common/LeaveDetailsModal';
 import { CheckCircle2 } from 'lucide-react';
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [toastMessage, setToastMessage] = useState('');
+  const [notifLeaveId, setNotifLeaveId] = useState(null);
 
   const showToast = (msg) => {
     setToastMessage(msg);
@@ -122,6 +124,7 @@ export default function App() {
         notifications={notifications}
         unreadCount={unreadCount}
         onRefreshNotifications={refreshData}
+        onNotificationClick={(leaveId) => setNotifLeaveId(leaveId)}
       />
 
       <main className="main-content">
@@ -161,6 +164,13 @@ export default function App() {
           />
         )}
       </main>
+
+      {/* Notification → Leave Timeline Modal */}
+      <LeaveDetailsModal
+        isOpen={!!notifLeaveId}
+        leaveId={notifLeaveId}
+        onClose={() => setNotifLeaveId(null)}
+      />
 
       {/* Toast Banner */}
       {toastMessage && (

@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { api } from '../../services/api';
 
-export default function Navbar({ currentUser, onSwitchUser, onLogout, notifications, unreadCount, onRefreshNotifications }) {
+export default function Navbar({ currentUser, onSwitchUser, onLogout, notifications, unreadCount, onRefreshNotifications, onNotificationClick }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [personas, setPersonas] = useState([]);
   const dropdownRef = useRef(null);
@@ -127,6 +127,10 @@ export default function Navbar({ currentUser, onSwitchUser, onLogout, notificati
                           if (!n.is_read) {
                             await api.markRead(n.id);
                             onRefreshNotifications();
+                          }
+                          if (n.leave_id && onNotificationClick) {
+                            onNotificationClick(n.leave_id);
+                            setShowDropdown(false);
                           }
                         }}
                       >
