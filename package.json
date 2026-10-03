@@ -1,0 +1,13 @@
+{
+  "name": "leave-management-system",
+  "version": "1.0.0",
+  "description": "Leave Management System with React, Node.js, SQLite, and RBAC",
+  "scripts": {
+    "server": "node backend/src/server.js",
+    "client": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build"
+  },
+  "keywords": ["leave-management", "rbac", "react", "express", "sqlite"],
+  "author": "",
+  "license": "ISC"
+}
